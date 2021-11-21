@@ -1,37 +1,85 @@
-function add(num1, num2) {
-  return num1 + num2;
-}
+const buttons = document.querySelectorAll(".button");
+const textfield = document.getElementById("textfield");
 
-function subtract(num1, num2) {
-  return num1 - num2;
-}
+let firstValue, secondValue, operator, indexOfOperator;
 
-function multiply(num1, num2) {
-  return num1 * num2;
-}
-
-function divide(num1, num2) {
-  return num1 / num2;
+calculation = { 
+  add(num1, num2) {
+    operator = "add";
+    return num1 + num2;
+  },
+  subtract(num1, num2) {
+    operator = "subtract";
+    return num1 - num2;
+  },
+  multiply(num1, num2) {
+    operator = "multiply";
+    return num1 * num2;
+  },
+  divide(num1, num2) {
+    operator = "divide";
+    return num1 / num2;
+  }
 }
 
 function operate(num1, num2 , operator) {
-  return operator(num1, num2);
+  if (operator === "add") {
+    return calculation.add(num1, num2);
+  }
+  if (operator === "subtract") {
+    return calculation.subtract(num1, num2);
+  }
+  if (operator === "multiply") {
+    return calculation.multiply(num1, num2);
+  }
+  if (operator === "divide") {
+    return calculation.divide(num1, num2);
+  }
 }
 
-const buttons = document.querySelectorAll(".button");
-const textfield = document.getElementById("textfield");
-let firstValue;
-let operatorFunction;
 for (let i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function() {
-    if (buttons[i].value == "del" || buttons[i].value == "clear" || buttons[i].value == "=") {
+    // do not allow these buttons to be in the calculator display
+    if (buttons[i].value == "del" || buttons[i].value == "clear") {
       return;
     }
+
+    // update calculator display with values
     textfield.value += buttons[i].value;
+
+    // storing first display value and operator input
     if (buttons[i].value == "+" || buttons[i].value == "-" || buttons[i].value == "*" || buttons[i].value == "÷") {
       firstValue = textfield.value;
       firstValue = firstValue.slice(0, -1);
-      operatorFunction = buttons[i].value;
-  })  
+      operator = buttons[i].value;
+      let textfieldValue = textfield.value;
+      indexOfOperator = textfieldValue.indexOf(operator);
+      if (operator == "+") {
+        operator = "add";
+      }
+      else if (operator == "-") {
+        operator = "subtract";
+      }
+      else if (operator == "*") {
+        operator = "multiply";
+      }
+      else if (operator == "÷") {
+        operator = "divide";
+      }
+    }
+
+    if (buttons[i].value == "=") {
+      let textfieldValue = textfield.value;
+      secondValue = textfieldValue.slice(indexOfOperator + 1, -1);
+      console.log(firstValue);
+      console.log(secondValue);
+      console.log(operator);
+      console.log(indexOfOperator);
+      let result = operate(firstValue, secondValue, operator)
+      console.log(result);
+    }
+  })
 }
+
+
 
