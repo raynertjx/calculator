@@ -2,6 +2,7 @@ const buttons = document.querySelectorAll(".button");
 const textfield = document.getElementById("textfield");
 
 let firstValue, secondValue, operator, indexOfOperator;
+let textfieldArr = [];
 
 calculation = { 
   add(num1, num2) {
@@ -46,6 +47,23 @@ for (let i = 0; i < buttons.length; i++) {
 
     // update calculator display with values
     textfield.value += buttons[i].value;
+    textfieldArr.push(buttons[i].value);
+    if (buttons[i].value == "+" || buttons[i].value == "-" || buttons[i].value == "*" || buttons[i].value == "÷") {
+      if (!firstValue) {
+        firstValue = textfieldArr.join("").slice(0, -1);
+        textfieldArr = [];
+        operator = buttons[i].value;
+      } 
+    }
+    if (firstValue) {
+      secondValue = textfieldArr.join("")
+    }
+    
+    console.log(firstValue);
+    console.log(secondValue);
+    console.log(operator);
+    console.log(textfieldArr);
+  
 
     // storing first display value and operator input
     if (buttons[i].value == "+" || buttons[i].value == "-" || buttons[i].value == "*" || buttons[i].value == "÷") {
@@ -71,10 +89,6 @@ for (let i = 0; i < buttons.length; i++) {
     if (buttons[i].value == "=") {
       let textfieldValue = textfield.value;
       secondValue = textfieldValue.slice(indexOfOperator + 1, -1);
-      console.log(firstValue);
-      console.log(secondValue);
-      console.log(operator);
-      console.log(indexOfOperator);
       let result = operate(firstValue, secondValue, operator)
       console.log(result);
     }
