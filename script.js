@@ -7,19 +7,19 @@ let textfieldArr = [];
 calculation = { 
   add(num1, num2) {
     operator = "add";
-    return num1 + num2;
+    return Number(num1) + Number(num2);
   },
   subtract(num1, num2) {
     operator = "subtract";
-    return num1 - num2;
+    return Number(num1) - Number(num2);
   },
   multiply(num1, num2) {
     operator = "multiply";
-    return num1 * num2;
+    return Number(num1) * Number(num2);
   },
   divide(num1, num2) {
     operator = "divide";
-    return num1 / num2;
+    return Number(num1) / Number(num2);
   }
 }
 
@@ -48,49 +48,55 @@ for (let i = 0; i < buttons.length; i++) {
     // update calculator display with values
     textfield.value += buttons[i].value;
     textfieldArr.push(buttons[i].value);
-    if (buttons[i].value == "+" || buttons[i].value == "-" || buttons[i].value == "*" || buttons[i].value == "÷") {
-      if (!firstValue) {
-        firstValue = textfieldArr.join("").slice(0, -1);
-        textfieldArr = [];
-        operator = buttons[i].value;
-      } 
-    }
-    if (firstValue) {
-      secondValue = textfieldArr.join("")
-    }
-    
-    console.log(firstValue);
-    console.log(secondValue);
-    console.log(operator);
     console.log(textfieldArr);
-  
-
-    // storing first display value and operator input
-    if (buttons[i].value == "+" || buttons[i].value == "-" || buttons[i].value == "*" || buttons[i].value == "÷") {
-      firstValue = textfield.value;
-      firstValue = firstValue.slice(0, -1);
-      operator = buttons[i].value;
-      let textfieldValue = textfield.value;
-      indexOfOperator = textfieldValue.indexOf(operator);
-      if (operator == "+") {
+    if ((buttons[i].value == "+" || buttons[i].value == "-" || buttons[i].value == "*" || buttons[i].value == "÷") && (!operator)) {
+      if (buttons[i].value == "+") {
         operator = "add";
       }
-      else if (operator == "-") {
+      else if (buttons[i].value == "-") {
         operator = "subtract";
       }
-      else if (operator == "*") {
+      else if (buttons[i].value == "*") {
         operator = "multiply";
       }
-      else if (operator == "÷") {
+      else if (buttons[i].value == "÷") {
         operator = "divide";
       }
+      if (!firstValue) {
+        firstValue = textfieldArr.join("").slice(0, -1);
+        console.log(firstValue);
+        textfieldArr = [];
+      } 
+      console.log(operator);
     }
 
-    if (buttons[i].value == "=") {
-      let textfieldValue = textfield.value;
-      secondValue = textfieldValue.slice(indexOfOperator + 1, -1);
-      let result = operate(firstValue, secondValue, operator)
-      console.log(result);
+    if ((firstValue) && (textfieldArr.includes("+") || textfieldArr.includes("-") || textfieldArr.includes("*") || textfieldArr.includes("÷"))) {
+      secondValue = textfieldArr.join("").slice(0, -1);
+      console.log(secondValue);
+      firstValue = operate(firstValue, secondValue, operator);
+      console.log(firstValue);
+      if (textfieldArr.includes("+")) {
+        operator = "add";
+      }
+      else if (textfieldArr.includes("-")) {
+        operator = "subtract";
+      }
+      else if (textfieldArr.includes("*")) {
+        operator = "multiply";
+      }
+      else if (textfieldArr.includes("÷")) {
+        operator = "divide";
+      }
+      console.log(operator);
+      secondValue = "";
+      textfieldArr = [];
+    }
+
+    if ((firstValue) && textfieldArr.includes("=")) {
+      secondValue = textfieldArr.join("").slice(0, -1);
+      console.log(secondValue);
+      firstValue = operate(firstValue, secondValue, operator);
+      console.log(firstValue);
     }
   })
 }
