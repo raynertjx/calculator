@@ -1,5 +1,5 @@
 const buttons = document.querySelectorAll(".button");
-const textfield = document.getElementById("textfield");
+const textfield = document.getElementById("maintextfield");
 const historytextfield = document.getElementById("historytextfield");
 
 let firstValue, secondValue, finalResult, operator, operatorSymbol;
@@ -49,6 +49,7 @@ function operate(num1, num2 , operator) {
   }
 }
 
+
 for (let i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener( "click", function() {
     
@@ -74,18 +75,18 @@ for (let i = 0; i < buttons.length; i++) {
     }
 
     // DELETE function 
-    if (buttons[i].value == "del") {
+    if (buttons[i].value == "DEL") {
       textfieldArr.pop();
-      textfield.value = textfield.value.slice(0, -1);
+      textfield.innerHTML = textfield.innerHTML.slice(0, -1);
     }
 
     // CLEAR ALL function
-    if (buttons[i].value == "clear") {
+    if (buttons[i].value == "AC") {
       firstValue = "";
       secondValue = "";
       operator = "";
-      textfield.value = "";
-      historytextfield.value = "";
+      textfield.innerHTML = "";
+      historytextfield.innerHTML = "";
       textfieldArr = [];
       for (let i = 0; i < activateAllButtons.length; i++) {
         activateAllButtons[i].disabled = false;
@@ -94,15 +95,11 @@ for (let i = 0; i < buttons.length; i++) {
 
     // update calculator display with values, only numbers and decimal points
       if (buttons[i].value >= 0 || buttons[i].value <= 9 || buttons[i].value == ".") {
-        textfield.value += buttons[i].value;
+        textfield.innerHTML += buttons[i].value;
       }
 
 
     if (textfieldArr !== undefined) {
-      additionBtn.classList.remove("active");
-      subtractBtn.classList.remove("active");
-      multiplyBtn.classList.remove("active");
-      divideBtn.classList.remove("active");
       for (let i = 0; i < activateOperatorButtons.length ; i++) {
         activateOperatorButtons[i].disabled = false;
       }
@@ -113,32 +110,25 @@ for (let i = 0; i < buttons.length; i++) {
       if (buttons[i].value == "+") {
         operator = "add";
         operatorSymbol = "+";
-        additionBtn.classList.add("active");
       }
       else if (buttons[i].value == "-") {
         operator = "subtract";
         operatorSymbol = "-";
-        subtractBtn.classList.add("active");
-        
       }
       else if (buttons[i].value == "x") {
         operator = "multiply";
         operatorSymbol = "x";
-        multiplyBtn.classList.add("active");
-        
       }
       else if (buttons[i].value == "÷") {
         operator = "divide";
-        operatorSymbol = "÷";
-        divideBtn.classList.add("active");
-        
+        operatorSymbol = "÷";        
       }
       if (!firstValue) {
         firstValue = textfieldArr.join("").slice(0, -1);
         console.log(firstValue);
         textfieldArr = [];
-        historytextfield.value = `${firstValue}` + " " + `${operatorSymbol}`;
-        textfield.value = "";  
+        historytextfield.innerHTML = `${firstValue}` + " " + `${operatorSymbol}`;
+        textfield.innerHTML = "";  
       } 
       console.log(operator);
     }
@@ -147,8 +137,8 @@ for (let i = 0; i < buttons.length; i++) {
       if (textfieldArr.includes("=")) {
         firstValue = finalResult;
         textfieldArr = [];
-        historytextfield.value = `${firstValue}` + " " + `${operatorSymbol}`;
-        textfield.value = "";
+        historytextfield.innerHTML = `${firstValue}` + " " + `${operatorSymbol}`;
+        textfield.innerHTML = "";
         return;
       }
       secondValue = textfieldArr.join("").slice(0, -1);
@@ -175,8 +165,8 @@ for (let i = 0; i < buttons.length; i++) {
       console.log(operator);
       secondValue = "";
       textfieldArr = [];
-      historytextfield.value = `${firstValue}` + " " + `${operatorSymbol}`;
-      textfield.value = "";  
+      historytextfield.innerHTML = `${firstValue}` + " " + `${operatorSymbol}`;
+      textfield.innerHTML = "";  
     }
 
     if ((firstValue) && buttons[i].value == "=") {
@@ -184,14 +174,14 @@ for (let i = 0; i < buttons.length; i++) {
       console.log(secondValue);
       finalResult = operate(firstValue, secondValue, operator);
   
-      historytextfield.value = `${firstValue}` + " " + `${operatorSymbol}` + " " + `${secondValue}` + " " + "=";
-      textfield.value = finalResult;
+      historytextfield.innerHTML = `${firstValue}` + " " + `${operatorSymbol}` + " " + `${secondValue}` + " " + "=";
+      textfield.innerHTML = finalResult;
       console.log(finalResult);
 
       
       if (secondValue == 0 && operator == "divide") {
-        textfield.value = "ERROR";
-        historytextfield.value = "You can't divide by 0!";
+        textfield.innerHTML = "ERROR";
+        historytextfield.innerHTML = "You can't divide by 0!";
         for (let i = 0; i < activateAllButtons.length; i++) {
           activateAllButtons[i].disabled = true;
         }
@@ -205,6 +195,8 @@ for (let i = 0; i < buttons.length; i++) {
     }
   })
 }
+
+
 
 
 
