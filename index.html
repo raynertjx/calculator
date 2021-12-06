@@ -2,42 +2,47 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Calculator</title>
 </head>
 <body>
-  <div id="container">
-    <input type="text" name="ans" id="historytextfield">
-    <input type="text" name="ans" id="textfield">
-    <div id="firstrow">
-      <input type="button" class="button" value="7">
-      <input type="button" class="button" value="8">
-      <input type="button" class="button" value="9">
-      <input type="button" class="button" value="del">
-      <input id="clearbtn" type="button" class="button" value="clear">
+  <div id="main">
+    <div id="container">
+      <div id="textfieldcontainer">
+        <div class="textfield" id="historytextfield"></div>
+        <div class="textfield" id="maintextfield"> </div>
+        <div class="shadow"></div>
+      </div>
+      <div id="buttoncontainer">
+        <input type="button" class="button grey" value="7">
+        <input type="button" class="button grey" value="8">
+        <input type="button" class="button grey" value="9">
+        <input type="button" class="button orange" value="DEL">
+        <input id="clearbtn" type="button" class="button orange" value="AC">
+        <input type="button" class="button grey" value="4">
+        <input type="button" class="button grey" value="5">
+        <input type="button" class="button grey" value="6">
+        <input id="multiplybtn" type="button" class="button operator" value="x">
+        <input id="dividebtn" type="button" class="button operator" value="÷">
+        <input type="button" class="button grey" value="1">
+        <input type="button" class="button grey" value="2">
+        <input type="button" class="button grey" value="3">
+        <input id="additionbtn" type="button" class="button operator" value="+">
+        <input id="subtractbtn" type="button" class="button operator" value="-">
+        <input type="button" class="button span-2 grey" value="0">
+        <input id="periodbtn" type="button" class="button grey" value=".">
+        <input type="button" class="button span-2" value="=">
+      </div>
     </div>
-    <div id="secondrow">
-      <input type="button" class="button" value="4">
-      <input type="button" class="button" value="5">
-      <input type="button" class="button" value="6">
-      <input id="multiplybtn" type="button" class="button operator" value="x">
-      <input id="dividebtn" type="button" class="button operator" value="÷">
-    </div>
-    <div id="thirdrow">
-      <input type="button" class="button" value="1">
-      <input type="button" class="button" value="2">
-      <input type="button" class="button" value="3">
-      <input id="additionbtn" type="button" class="button operator" value="+">
-      <input id="subtractbtn" type="button" class="button operator" value="-">
-    </div>
-    <div id="fourthrow">
-      <input type="button" class="button" value="0">
-      <input id="periodbtn" type="button" class="button" value=".">
-      <input type="button" class="button" value="=">
+    <div id="footer">
+      <p>Built by <a href="https://github.com/raynertjx">Rayner Toh</a></p>
     </div>
   </div>
-  <script src="script.js"></script>
+  <script src="calculator.js"></script>
 </body>
 </html>
